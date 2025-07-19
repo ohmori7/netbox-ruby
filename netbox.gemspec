@@ -9,7 +9,7 @@ Gem::Specification.new do |spec|
   spec.email = ["ohmori@tottori-u.ac.jp"]
 
   spec.summary = "Netbox library and tools for Ruby."
-  spec.homepage = "https://github.com/ohmori7/netbox/"
+  spec.homepage = "https://github.com/ohmori7/netbox-ruby/"
   spec.required_ruby_version = ">= 1.8.0"
   spec.license = "BSD-2-Clause"
 
