@@ -3,7 +3,7 @@
 require_relative "lib/netbox/version"
 
 Gem::Specification.new do |spec|
-  spec.name = "netbox"
+  spec.name = "netbox-ruby"
   spec.version = Netbox::VERSION
   spec.authors = ["Motoyuki OHMORI"]
   spec.email = ["ohmori@tottori-u.ac.jp"]
