@@ -10,6 +10,5 @@ module Netbox
 
 	# XXX: platform independent path configuration...
         ENV['GOOGLE_APPLICATION_CREDENTIALS'] ||= File.join(Dir.home, ".config/gcloud/credentials.json")
-	ENV['NETBOX_URL'] ||= 'http://localhost:8000'
-	ENV['NETBOX_API_TOKEN'] ||= File.read(File.join(Dir.home, ".config/netbox/netbox-api-token.txt")).strip
+	ENV['NETBOX_APPLICATION_CREDENTIALS'] ||= File.join(Dir.home, ".config/netbox/netbox.json")
 end

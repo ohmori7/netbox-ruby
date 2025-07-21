@@ -1,12 +1,13 @@
 module Netbox
 	class API
 		def initialize
-			@token = ENV['NETBOX_API_TOKEN']
+			credentials = JSON.load(File.read(ENV['NETBOX_APPLICATION_CREDENTIALS']))
+			@token = credentials['token']
 			name = self.class.name.split('::').drop(1).join('/')
 			    .gsub(/([a-z\d])([A-Z])/, '\1-\2')
 			    .gsub(/([A-Z]+)([A-Z][a-z]{2,})/, '\1-\2')
 			    .downcase
-			@uri = URI.parse("#{ENV['NETBOX_URL']}/api/#{name}/")
+			@uri = URI.parse("#{credentials['url']}/api/#{name}/")
 		end
 
 		def __send(method, params = nil)
