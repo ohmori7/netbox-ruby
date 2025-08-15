@@ -4,6 +4,7 @@ require_relative "netbox/version"
 require_relative "netbox/api"
 require_relative "netbox/ipam"
 require_relative "netbox/dcim"
+require_relative "netbox/extras"
 
 module Netbox
 	class Error < StandardError; end
