@@ -8,6 +8,12 @@ module Netbox
 			    .gsub(/([A-Z]+)([A-Z][a-z]{2,})/, '\1-\2')
 			    .downcase
 			@uri = URI.parse("#{credentials['url']}/api/#{name}/")
+			if $http.nil?
+				$http = Net::HTTP.start(@uri.host, @uri.port,
+				    :use_ssl => @uri.scheme == 'https',
+				    :verify_mode => OpenSSL::SSL::VERIFY_NONE)
+				puts "create HTTP instance"
+			end
 		end
 
 		def __send(method, params = nil)
@@ -27,9 +33,11 @@ module Netbox
 			end
 			req['Authorization'] = "Token #{@token}"
 			req['Accept'] = 'application/json'
-			response = Net::HTTP.start(@uri.host, @uri.port,
-			    :use_ssl => @uri.scheme == 'https',
-			    :verify_mode => OpenSSL::SSL::VERIFY_NONE) { |http| http.request(req) }
+			response = $http.request(req)
+			if ! response.is_a?(Net::HTTPSuccess)
+				sleep 2
+				response = $http.request(req)
+			end
 			r = response.read_body
 			if response['Content-Type'] == 'application/json'
 				r = JSON.parse(r)
